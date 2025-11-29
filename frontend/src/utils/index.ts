@@ -29,48 +29,48 @@ export function createNewNode(type: string, data: any, zIndex?: number) {
     data: data,
     zIndex: zIndex || 1000,
   };
-  
+
   socket.emit("nodeEvent", newNode);
 }
 
-export function removeDuplicates(nodes:any) {
+export function removeDuplicates(nodes: any) {
   // remove duplicates by id
   const uniqueNodes = nodes.filter((node: any, index: number, self: any) => {
     return index === self.findIndex((t: any) => t.id === node.id);
   });
-  
+
   return uniqueNodes;
 }
 
-export async function getUrlAlert(){
+export async function getUrlAlert() {
   const { value: url } = await Swal.fire({
-    input: 'url',
-    inputLabel: 'Digite a URL',
-    inputPlaceholder: 'Digite a URL',
+    input: "url",
+    inputLabel: "Enter the URL",
+    inputPlaceholder: "Enter the URL",
     showCancelButton: true,
-  })
-  
+  });
+
   if (url) {
     return url;
   }
   return null;
 }
 
-export async function getFontSize(){
+export async function getFontSize() {
   // select with Swal
   const fontSizeList = {
-    '15px': 'pequeno',
-    '30px': 'médio',
-    '50px': 'grande',
-  }
+    "15px": "small",
+    "30px": "medium",
+    "50px": "big",
+  };
 
   const { value: fontSize } = await Swal.fire({
-    title: 'Selecione o tamanho da fonte',
-    input: 'select',
+    title: "Select the font size",
+    input: "select",
     inputOptions: fontSizeList,
-    inputPlaceholder: 'Selecione o tamanho da fonte',
+    inputPlaceholder: "Select the font size",
     showCancelButton: true,
-  })
+  });
 
   if (fontSize) {
     return fontSize;
@@ -78,14 +78,14 @@ export async function getFontSize(){
   return null;
 }
 
-export async function getTextAlert(){
+export async function getTextAlert() {
   const { value: text } = await Swal.fire({
-    input: 'text',
-    inputLabel: 'Digite um nome',
-    inputPlaceholder: 'Digite um nome',
+    input: "text",
+    inputLabel: "Enter the board name",
+    inputPlaceholder: "Enter the board name",
     showCancelButton: true,
-  })
-  
+  });
+
   if (text) {
     // return just the first 21 characters
     return text.substring(0, 21);
